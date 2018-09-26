@@ -1,0 +1,39 @@
+Please contribute if you find this software useful.
+For more information, visit https://www.octave.org/get-involved.html
+
+Read https://www.octave.org/bugs.html to learn how to submit bug reports.
+For information about changes from previous versions, type 'news'.
+
+>> arr_t1 = [1,2;3,4]
+arr_t1 =
+
+   1   2
+   3   4
+
+>> arr_t2 = [5,9;15,27]
+arr_t2 =
+
+    5    9
+   15   27
+
+>> arr_t1 + arr_t2
+ans =
+
+    6   11
+   18   31
+
+>> arr_t1 - arr_t2
+ans =
+
+   -4   -7
+  -12  -23
+
+
+ 
+>> arr_t1 * arr_t2
+ans =
+
+    35    63
+    75   135
+
+>>
