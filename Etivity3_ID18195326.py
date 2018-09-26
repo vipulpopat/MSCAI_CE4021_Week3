@@ -30,6 +30,13 @@ class Matrix(object):
         Return:
             Matrix  Instance of the Matrix class, or None if the element_data is not valid.
         """
+        
+        # If element is an empty list return an error
+        if not isinstance (list.__class) or not element_data:
+            raise ValueError("Element data does not describe a valid matrix.")
+            
+        # By definition a matrix has a fixed number of rows and columns.  
+        # The order/dimensions is the number of rows and all rows will contain the same number of columns as the first row
         self.order = (len(element_data), len(element_data[0]))
         self.elements = element_data
         
@@ -39,7 +46,7 @@ class Matrix(object):
         return self.order
         
         
-    def get_size(self):
+    def get_dimension(self):
         """Returns a tuple with the order of the matrix, i.e. (rows x columns)."""
         return self.order
     
@@ -99,26 +106,33 @@ class Matrix(object):
     
 
     def _apply_function_to_elements(self, other, lfunc):
+        """Returns a list containing the results of the function lfunc applied to rows of both self and other.  Used for simple operations like addition and subtration.""" 
         return [list(map(lfunc, self_row, other_row)) for self_row, other_row in zip(self.elements, other.elements) ]
         
         
     def __add__(self, other):
+        """Operator overload method for the + operator.  For matrix addition the other matrix must have the same order/dimension as this matrix."""
         if self._is_valid_add_sub_eq_matrix(other):
             return Matrix (self._apply_function_to_elements(other, lambda x, y: x + y))
         else:
-            return None        
+            return NotImplemented        
     
         
     def __sub__(self, other):        
+        """Operator overload method for the - operator.  For matrix subtraction the other matrix must have the same order/dimension as this matrix."""
         if self._is_valid_add_sub_eq_matrix(other):
             return Matrix (self._apply_function_to_elements(other, lambda x, y: x - y))
         else:
-            return None        
+            return NotImplemented        
     
             
     def __mul__(self, other):
 
-        """Multiplies this matrix by a scalar value or another matrix."""
+        """Operator overload for the * operator.  Multiplies this matrix by a scalar value or another valid matrix.  
+        
+        For matrix multiplication the number of rows in other must match the number of columns in this matrix.
+        """
+        
         new_matrix = None
         
         if isinstance(other, Number):
@@ -127,59 +141,25 @@ class Matrix(object):
             new_matrix = Matrix(new_elements)
         elif self._is_valid_matrix_multiplier(other):
             # Matrix multiplication C=AB, i.e. c = (self)(other)
-            c_order = (self.order[Matrix.__COLS], other.order[Matrix._COLS])
+            
+            # The order/dimension of the Product matrix is the rows from
+            c_order = (self.order[Matrix._ROWS], other.order[Matrix._COLS])
 
             # Initialise the elements array to an m*n array of 0s
             c = [[0]*c_order[Matrix._COLS] for i in range(c_order[Matrix._ROWS])]
             
             # For each position in the new matrix c, calculate the values from this matrix and other
+            # For any C[i][k] = Sum over j of (A[i][j]*B[j][k]) 
             for i in range(c_order[Matrix._ROWS]):
                 for k in range(c_order[Matrix._COLS]):
                     for j in range(self.order[Matrix._COLS]):
                         c[i][k] += (self.elements[i][j] * other.elements[j][k])              
                                     
             new_matrix = c
+        else:
+            return NotImplemented
             
         return new_matrix
             
                       
             
-a = Matrix([[1, 2, 3], [0, 3, 4], [5, 6, 8]])
-print(a)
-
-b = a*8
-print(b)
-
-c = Matrix([[1, 2, 3], [0, 3, 4], [5, 6, 8]])
-
-print(a == b)
-print(a == c)
-  
-
-d = a + c
-print(d)
-
-e = b - a
-print(e)
-
-
-print ("Matrix multiplication")
-
-f = Matrix([[1, 1], [2, 2]])
-g = Matrix([[2], [1], [3]])
-h = Matrix([[1, 2, 3]])
-i = Matrix([[2, 1], [1, 2], [3, 0]])
-
-print(f)
-print(g)
-print(h)
-print(i)
-
-
-print(a._is_valid_matrix_multiplier(b))
-print(a._is_valid_matrix_multiplier(f))
-print(a._is_valid_matrix_multiplier(g))
-print(a._is_valid_matrix_multiplier(h))
-print(a._is_valid_matrix_multiplier(i))
-
-print(a * g)
