@@ -3,6 +3,7 @@
 
 from numbers import Number
 
+
 # Write Python functions for the following operations on matrices without making use of imported modules:
 #    Providing the size of a matrix as a 2-dimensional tuple
 #    Summing and subtracting two matrices
@@ -32,7 +33,7 @@ class Matrix(object):
         """
         
         # If element is an empty list return an error
-        if not isinstance (list.__class) or not element_data:
+        if not isinstance(element_data, list) or not element_data:
             raise ValueError("Element data does not describe a valid matrix.")
             
         # By definition a matrix has a fixed number of rows and columns.  
@@ -155,11 +156,9 @@ class Matrix(object):
                     for j in range(self.order[Matrix._COLS]):
                         c[i][k] += (self.elements[i][j] * other.elements[j][k])              
                                     
-            new_matrix = c
+            new_matrix = Matrix(c)
         else:
             return NotImplemented
             
         return new_matrix
-            
-                      
             
