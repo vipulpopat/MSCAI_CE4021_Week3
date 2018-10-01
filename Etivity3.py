@@ -69,7 +69,7 @@ def multiply_row_by_column(row_matrix, column_matrix):
     """ Multiply a row by a column.  """
 
     row_matrix_nb_columns = size(row_matrix)[1]
-    result = 0;
+    result = 0
     for index in range(row_matrix_nb_columns):
         result += row_matrix[0][index] * column_matrix[index][0]
 
@@ -137,7 +137,7 @@ def test_matrix_addition_substraction(test_name, matrix_a, matrix_b,
 def test_matrix_by_matrix_multiplication(test_name, matrix_a, matrix_b,
                                           expected_a_times_b):
     """ Generic test case for matrix multiplications. """
-    
+
     print_header(test_name)
 
     a_times_b = matrix_operation(matrix_a, matrix_b, "*")
@@ -180,7 +180,7 @@ def run_test_matrix_size():
 
 def run_test_matrix_addition_substraction():
     """ Performs matrix operation using real data."""
-    
+
     # Test 2x2 matrix operations
     matrix_a = [[1, 2], [3, 4]]
     matrix_b = [[5, 6], [7, 8]]
@@ -212,7 +212,8 @@ def run_test_matrix_by_vector_multiplication():
 
     expected_a_times_b = [[70], [30], [60], [50]]
 
-    test_matrix_by_matrix_multiplication("matrix by vector multiplication", matrix_a, matrix_b, expected_a_times_b)
+    test_matrix_by_matrix_multiplication("matrix by vector multiplication",
+                                         matrix_a, matrix_b, expected_a_times_b)
 
 
 def run_test_matrix_by_matrix_multiplication():
@@ -220,22 +221,26 @@ def run_test_matrix_by_matrix_multiplication():
     matrix_a = [[1, 2], [3, 4]]
     matrix_b = [[5, 6], [7, 8]]
     expected_a_times_b = [[19, 22], [43, 50]]
-    test_matrix_by_matrix_multiplication("2x2 matrix by 2x2 matrix multiplication", matrix_a, matrix_b, expected_a_times_b)
+    test_matrix_by_matrix_multiplication("2x2 matrix by 2x2 matrix multiplication",
+                                         matrix_a, matrix_b, expected_a_times_b)
 
     matrix_a = [[9, 8, 7, 6], [5, 4, 3, 2], [1, 0, 9, 8], [7, 6, 5, 4]]
     matrix_b = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 0, 1, 2], [3, 4, 5, 6]]
     expected_a_times_b = [[130, 90, 120, 150], [58, 42, 56, 70], [106, 34, 52, 70], [94, 66, 88, 110]]
-    test_matrix_by_matrix_multiplication("4x4 matrix by 4x4 matrix multiplication", matrix_a, matrix_b, expected_a_times_b)
+    test_matrix_by_matrix_multiplication("4x4 matrix by 4x4 matrix multiplication",
+                                         matrix_a, matrix_b, expected_a_times_b)
 
     matrix_a = [[9, 8, 7, 6], [5, 4, 3, 2], [1, 0, 9, 8], [7, 6, 5, 4]]
     matrix_b = [[1, 5], [2, 6], [3, 7], [4, 8]]
     expected_a_times_b = [[70, 190], [30, 86], [60, 132], [50, 138]]
-    test_matrix_by_matrix_multiplication("4x4 matrix by 4x2 matrix multiplication", matrix_a, matrix_b, expected_a_times_b)
+    test_matrix_by_matrix_multiplication("4x4 matrix by 4x2 matrix multiplication",
+                                         matrix_a, matrix_b, expected_a_times_b)
 
     matrix_a = [[9, 8, 7, 6], [5, 4, 3, 2]]
     matrix_b = [[1, 5], [2, 6], [3, 7], [4, 8]]
     expected_a_times_b = [[70, 190], [30, 86]]
-    test_matrix_by_matrix_multiplication("2x4 matrix by 4x2 matrix multiplication", matrix_a, matrix_b, expected_a_times_b)
+    test_matrix_by_matrix_multiplication("2x4 matrix by 4x2 matrix multiplication",
+                                         matrix_a, matrix_b, expected_a_times_b)
 
 
 #
