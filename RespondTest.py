@@ -1,4 +1,7 @@
-from Etivity3_ID18195326 import Matrix
+# Student Name:    Mark Murnane
+# Student ID:      18195326
+
+from Etivity3_ID18195326_Matrix import Matrix
 
 
 ### 
@@ -37,16 +40,16 @@ print("\n\n")
 ###
 ### Multiplication
 ###
-h = a * b
-print ("A * B = ")
+h = a @ b
+print ("A . B = ")
 print (h)
 
-h = a * c
-print ("A * C = ")
+h = a @ c
+print ("A . C = ")
 print (h)
 
 h = b * 3
-print("B * 3 = ")
+print("B x 3 = ")
 print (h)
 
 ###
@@ -67,6 +70,18 @@ print (h)
 ###
 ### Vector
 ###
-h = b * v
-print ("B * V = ")
+h = b @ v
+print ("B . V = ")
 print (h)
+
+# h = v * b
+# print ("V * B = ")
+# print (h)
+
+h =  2 * a
+print("2 x A = ")
+print (h)
+
+h = a * 2
+print("A x 2 = ")
+print(h)

@@ -1,4 +1,7 @@
-from Etivity3_ID18195326 import Matrix
+# Student Name:    Mark Murnane
+# Student ID:      18195326
+
+from Etivity3_ID18195326_Matrix import Matrix
 
 
 ### 
