@@ -17,24 +17,33 @@ class TestMatrixImplementationEtivity3(unittest.TestCase):
         
     Edge Cases in this Unit Test are:
         1) Create a new matrix with an empty list or non-list parameter
-        2) Perform addition/subtraction of a matrix and a non-matrix
-        3) Perform addition/subtraction of a matrix and an incompatible matrix
-        4) Multiply a matrix by a non-numeric value
-        5) Multiply a matrix by an incompatible matrix
+        2) Create a matrix with non-list rows
+        3) Create a matrix with empty rows
+        4) Create a matrix with rows that are not the same length
+        5) Perform addition/subtraction of a matrix and a non-matrix
+        6) Perform addition/subtraction of a matrix and an incompatible matrix
+        7) Multiply a matrix by a non-numeric value
+        8) Multiply a matrix by an incompatible matrix
     """
     
     # Internal matrix and (column) vector representations for test cases
-    _A_2x2 = [[1,3], [5,7]]
-    _B_2x2 = [[2,4], [6,8]]
-    
-    _B_2x1 = [[2], [1]]
-    
-    _A_3x3 = [[1,2,3], [0,3,4], [5,6,8]]
-    _B_3x3 = [[1,3,6], [2,1,2], [4,2,1]]
-    
-    _B_3x1 = [[2], [1], [3]]
-    
-    _B_3x2 = [[4,7], [3,9], [5,2]]
+    def setUp(self):
+        self._A_2x2 = ((1,3), (5,7))
+        self._B_2x2 = ((2,4), (6,8))
+        
+        self._Err_A_2x2 = [[1,3], ["5", 7]]
+        self._Err_B_2x2 = [[2,4], []]
+        self._Err_C_2x2 = [[1,2], [4,5,6]]
+        self._Err_D = [[3, 4], 5]
+        
+        self._B_2x1 = [[2], [1]]
+        
+        self._A_3x3 = [[1,2,3], [0,3,4], [5,6,8]]
+        self._B_3x3 = [[1,3,6], [2,1,2], [4,2,1]]
+        
+        self._B_3x1 = [[2], [1], [3]]
+        
+        self._B_3x2 = [[4,7], [3,9], [5,2]]
     
         
     def test_matrix_creation(self):
@@ -46,8 +55,12 @@ class TestMatrixImplementationEtivity3(unittest.TestCase):
         
     def test_matrix_invalid_creation(self):
         # Checks that a matrix can't be created without a valid element list
-        self.assertRaises(ValueError, Matrix, None)
-        self.assertRaises(ValueError, Matrix, [])
+        self.assertRaises(TypeError, Matrix, None)
+        self.assertRaises(TypeError, Matrix, [])
+        self.assertRaises(TypeError, Matrix, self._Err_D)
+        self.assertRaises(ValueError, Matrix, self._Err_A_2x2)
+        self.assertRaises(ValueError, Matrix, self._Err_B_2x2)
+        self.assertRaises(ValueError, Matrix, self._Err_C_2x2)
         
     
         
@@ -56,7 +69,7 @@ class TestMatrixImplementationEtivity3(unittest.TestCase):
         a = Matrix(self._A_2x2)
         b = Matrix(self._B_2x2)
         c = a + b
-        expected = [[3,7], [11,15]]
+        expected = ((3,7), (11,15))
         self.assertEqual(c.elements, expected)
     
         
@@ -77,7 +90,7 @@ class TestMatrixImplementationEtivity3(unittest.TestCase):
         a = Matrix(self._A_2x2)
         b = Matrix(self._B_2x2)
         c = a - b
-        expected = [[-1,-1], [-1,-1]]
+        expected = ((-1,-1), (-1,-1))
         self.assertEqual(c.elements, expected)
     
         
@@ -97,7 +110,7 @@ class TestMatrixImplementationEtivity3(unittest.TestCase):
         # Checks the correct multiplication of a matrix by a scalar      
         a = Matrix(self._B_3x2)
         b = a * 3
-        expected = [[12,21], [9,27], [15,6]]
+        expected = ((12,21), (9,27), (15,6))
         self.assertEqual(b.elements, expected)
 
 
@@ -105,8 +118,8 @@ class TestMatrixImplementationEtivity3(unittest.TestCase):
         # Checks the correct multiplication of a matrix by a vector      
         a = Matrix(self._B_2x2)
         b = Matrix(self._B_2x1)
-        c = a * b
-        expected = [[8],[20]]
+        c = a @ b
+        expected = ((8,),(20,))
         self.assertEqual(c.elements, expected)
 
         
@@ -114,8 +127,8 @@ class TestMatrixImplementationEtivity3(unittest.TestCase):
         # Checks that two same size matrices are multiplied together correctly
         a = Matrix(self._A_2x2)
         b = Matrix(self._B_2x2)
-        c = a * b
-        expected = [[20,28], [52,76]]
+        c = a @ b
+        expected = ((20,28), (52,76))
         self.assertEqual(c.elements, expected)
         
         
@@ -123,8 +136,8 @@ class TestMatrixImplementationEtivity3(unittest.TestCase):
         # Checks that two different size matrices are multiplied together correctly
         a = Matrix(self._A_3x3)
         b = Matrix(self._B_3x2)
-        c = a * b
-        expected = [[25,31], [29,35], [78,105]]
+        c = a @ b
+        expected = ((25,31), (29,35), (78,105))
         self.assertEqual(c.elements, expected)
         
         
