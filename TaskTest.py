@@ -32,8 +32,8 @@ print(f"Size of A is {a.get_order()}")
 ###
 ### Multiplication
 ###
-c = a * b
-print ("A * B = ")
+c = a @ b
+print ("A @ B = ")
 print (c)
 
 ###
@@ -54,6 +54,6 @@ print (c)
 ###
 ### Vector
 ###
-c = b * v
-print ("B * V = ")
+c = b @ v
+print ("B @ V = ")
 print (c)
