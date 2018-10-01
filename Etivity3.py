@@ -66,7 +66,7 @@ def get_col_from_matrix(matrix, column_index):
 
 
 def multiply_row_by_column(row_matrix, column_matrix):
-    """ Multiply a row with a column.  """
+    """ Multiply a row by a column.  """
 
     row_matrix_nb_columns = size(row_matrix)[1]
     result = 0;
@@ -77,7 +77,7 @@ def multiply_row_by_column(row_matrix, column_matrix):
 
 
 def check_matrices_compatible_with_operation(matrix_a, matrix_b, operation):
-    """ Throw an exception matrices incompatible with operation. """
+    """ Throw an exception if matrices are incompatible with operation. """
 
     nb_row_matrix_a, nb_col_matrix_a = size(matrix_a)
     nb_row_matrix_b, nb_col_matrix_b = size(matrix_b)
@@ -112,14 +112,14 @@ def test_matrix_size(test_name, matrix, expected_size):
 
     print_header(test_name)
     result = size(matrix)
-    print("Matrix: {0}".format(matrix))
-    print("Size  : {0}".format(result))
+    print("Matrix: {}".format(matrix))
+    print("Size  : {}".format(result))
     assert expected_size == result
 
 
 def test_matrix_addition_substraction(test_name, matrix_a, matrix_b,
                                   expected_a_plus_b, expected_a_minus_b):
-    """ Generic test case for matrix operations. """
+    """ Generic test case for matrix additions/substractions. """
 
     print_header(test_name)
     a_plus_b = matrix_operation(matrix_a, matrix_b, "+")
