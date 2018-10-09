@@ -60,6 +60,10 @@ class Matrix:
 
         return True
 
+    def size(self):
+        """Return the size of the matrix as a tuple of row and col size"""
+        return (self.rows, self.cols)
+
     def is_equal(self, other_matrix):
         """Compare one matrix to another to see if they are equal in dimension NOT Contents
 

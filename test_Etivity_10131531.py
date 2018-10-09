@@ -76,6 +76,11 @@ class TestEtivity3(unittest.TestCase):
         result = multiply_matrices(self.matrix_c, self.vector_g)
         self.assertEqual(result, expected_result)
 
+    def test_matrix_size_method(self):
+        matrix_size = self.matrix_a.size()
+        expected_size = (2, 2)
+        self.assertEqual(matrix_size, expected_size)
+
 
 if __name__ == '__main__':
     unittest.main()
